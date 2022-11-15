@@ -17,8 +17,23 @@ depends_on = None
 
 
 def upgrade():
-    pass
+    op.execute(
+        """
+        CREATE TABLE schedulers(
+            id SERIAL PRIMARY KEY,
+            first_name TEXT NOT NULL,
+            last_name TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL,
+            username TEXT NOT NULL UNIQUE
+        );
+        """
+    )
 
 
 def downgrade():
-    pass
+    op.execute(
+        """
+        DROP TABLE schedulers;
+        """
+    )

@@ -1,3 +1,4 @@
+#interact with POstgres database using Python database adapter psycopg2 in raw SQL.
 import psycopg2
 
 # Connect to your postgres DB
@@ -61,3 +62,17 @@ cur.execute(
 admin_names = cur.fetchall()
 for n in admin_names:
     print(n[0], n[1])
+
+
+print('')  # new line
+
+cur.execute(
+    """
+    SELECT first_name, last_name FROM schedulers ORDER BY last_name
+    """
+)
+
+admin_names = cur.fetchall()
+
+for count, name in enumerate(admin_names):
+    print(str(count+1) + ".", name[0].capitalize(), name[1].capitalize())

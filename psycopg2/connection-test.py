@@ -50,4 +50,14 @@ cur.execute(
 # Retrieve query results
 records = cur.fetchall()
 
-print(records)
+# print(records)
+
+cur.execute(
+    """
+    SELECT first_name, last_name FROM schedulers
+    """
+)
+
+admin_names = cur.fetchall()
+for n in admin_names:
+    print(n[0], n[1])

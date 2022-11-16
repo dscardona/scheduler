@@ -17,6 +17,9 @@ class Employee(Base):
     email = Column(String, nullable=False, unique=True)
     extension = Column(Integer, nullable=False)
 
+    def formatted_name(self):
+        return self.first_name.capitalize() + " - " + self.last_name.capitalize()
+
 
 # Recreate all tables each time script is run
 Base.metadata.drop_all(engine)
@@ -40,3 +43,19 @@ for item in seed_data:
 session = Session()
 session.bulk_save_objects(employee_objects)
 session.commit()
+
+# Create a new session for performing queries
+session = Session()
+
+# Run a SELECT * query on the employees table
+employees = session.query(Employee).all()
+
+for n in employees:
+    print(n.first_name, n.last_name)
+
+# SELECT * FROM employees ORDER BY first_name, email
+employees = session.query(Employee).order_by(
+    Employee.first_name, Employee.email).all()
+
+for index, e in enumerate(employees):
+    print(str(index+1) + ". " + e.formatted_name())

@@ -24,10 +24,5 @@ class Employee(db.Model):
     email = db.Column(db.String(128), unique=True, nullable=False)
     extension = db.Column(db.Integer, nullable=False)
 
-class Day_off(db.Model):
-    __tablename__ = 'days_off'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    day_of_week = db.Column(db.String(28), nullable=False)
-    date = db.Column(db.String(28), nullable=False, primary_key=True, unique=True)
 
 

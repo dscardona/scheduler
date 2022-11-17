@@ -16,20 +16,6 @@ class Assignment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     description = db.Column(db.String(128), nullable=False)
 
-class Employee(db.Model):
-    __tablename__ = 'employees'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    first_name = db.Column(db.String(128), nullable=False)
-    last_name = db.Column(db.String(128), nullable=False)
-    email = db.Column(db.String(128), unique=True, nullable=False)
-    extension = db.Column(db.Integer, nullable=False)
-
-class Day_off(db.Model):
-    __tablename__ = 'days_off'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    day_of_week = db.Column(db.String(28), nullable=False)
-    date = db.Column(db.String(28), nullable=False, unique=True)
-
 employees_days_off_table = db.Table(
     'employees_days_off',
     db.Column(
@@ -44,6 +30,24 @@ employees_days_off_table = db.Table(
         primary_key=True
     ),
 )
+
+class Employee(db.Model):
+    __tablename__ = 'employees'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    first_name = db.Column(db.String(128), nullable=False)
+    last_name = db.Column(db.String(128), nullable=False)
+    email = db.Column(db.String(128), unique=True, nullable=False)
+    extension = db.Column(db.Integer, nullable=False)
+    days_off = db.relationship('Day_off', secondary=employees_days_off_table, lazy='subquery', backref=db.backref('employees', lazy=True))
+
+
+class Day_off(db.Model):
+    __tablename__ = 'days_off'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    day_of_week = db.Column(db.String(28), nullable=False)
+    date = db.Column(db.String(28), nullable=False, unique=True)
+    user_taking_off = db.relationship('Employee', secondary=employees_days_off_table)
+
 
 schedule_table = db.Table(
     'schedule',

@@ -45,3 +45,33 @@ employees_days_off_table = db.Table(
     ),
 )
 
+schedule_table = db.Table(
+    'schedule',
+    db.Column(
+        'date', db.String,
+        primary_key=True
+    ),
+
+    db.Column(
+        'day_of_week', db.String,
+        nullable=False
+    ),
+
+    db.Column(
+        'scheduler_id', db.Integer,
+        db.ForeignKey('schedulers.id'),
+        nullable=False
+    ),
+
+    db.Column(
+        'employee_id', db.Integer,
+        db.ForeignKey('employees.id'),
+        primary_key=True
+    ),
+
+    db.Column(
+        'assignment_id', db.Integer,
+        db.ForeignKey('assignments.id'),
+        primary_key=True
+    ),
+)

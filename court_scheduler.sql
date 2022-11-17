@@ -21,10 +21,15 @@ CREATE TABLE assignments (
 );
 
 CREATE TABLE days_off (
+	id SERIAL PRIMARY KEY,
 	day_of_week TEXT NOT NULL,
-	date DATE NOT NULL,
+	date DATE NOT NULL
+);
+
+CREATE TABLE employees_days_off (
 	employee_id INT NOT NULL,
-	PRIMARY KEY (date, employee_id)
+	day_off_id INT NOT NULL,
+	PRIMARY KEY (employee_id, day_off_id)
 );
 
 CREATE TABLE schedule (
@@ -51,11 +56,15 @@ ADD CONSTRAINT fk_schedule_assignments
 FOREIGN KEY (assignment_id)
 REFERENCES assignments;
 
-ALTER TABLE days_off
-ADD CONSTRAINT fk_days_off_employees
+ALTER TABLE employees_days_off
+ADD CONSTRAINT fk_employees_days_off_employees
 FOREIGN KEY (employee_id)
 REFERENCES employees;
 
+ALTER TABLE employees_days_off
+ADD CONSTRAINT fk_employees_days_off_days_off
+FOREIGN KEY (day_off_id)
+REFERENCES days_off;
 
 
 INSERT INTO schedulers (first_name, last_name, email, password, username) VALUES 
@@ -82,13 +91,21 @@ VALUES
 ('AP5'), ('FA'), ('FB'), ('FC'), ('TP2/TP3'), ('TP4/TP5'),
 ('Window'), ('Admin'), ('Translation'), ('Clerical'), ('Other');
 
-INSERT INTO days_off (day_of_week, date, employee_id) VALUES 
-('Monday', '2022-11-14', 1),
-('Tuesday', '2022-11-15', 1),
-('Wednesday', '2022-11-16', 1),
-('Monday', '2022-11-14', 2),
-('Tuesday', '2022-11-15', 2),
-('Monday', '2022-11-14', 3);
+INSERT INTO days_off (day_of_week, date) VALUES 
+('Monday', '2022-11-14'),
+('Tuesday', '2022-11-15'),
+('Wednesday', '2022-11-16'),
+('Monday', '2022-11-14'),
+('Tuesday', '2022-11-15'),
+('Monday', '2022-11-14');
+
+INSERT INTO employees_days_off(employee_id, day_off_id) VALUES
+(1, 1)
+(1, 2)
+(1, 3)
+(2, 1)
+(2, 2)
+(3, 1)
 
 INSERT INTO schedule (day_of_week, date, scheduler_id, employee_id, assignment_id) VALUES 
 ('Monday', '2022-11-14', 1, 4, 1),

@@ -10,3 +10,4 @@ class Scheduler(db.Model):
     email = db.Column(db.String(128), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     username = db.Column(db.String(128), unique=True, nullable=False)
+

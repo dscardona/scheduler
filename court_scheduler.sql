@@ -37,7 +37,7 @@ CREATE TABLE schedule (
 	day_of_week TEXT NOT NULL,
 	scheduler_id INT NOT NULL,
 	employee_id INT NOT NULL,
-	assignment_id INT NOT NULL,
+	assignment_id TEXT NOT NULL,
 	PRIMARY KEY (date, employee_id, assignment_id)
 );
 

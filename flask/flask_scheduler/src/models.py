@@ -38,7 +38,7 @@ class Employee(db.Model):
     last_name = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), unique=True, nullable=False)
     extension = db.Column(db.Integer, nullable=False)
-    days_off = db.relationship('Day_off', secondary=employees_days_off_table, lazy='subquery', backref=db.backref('employees', lazy=True))
+    days_off = db.relationship('Day_off', secondary=employees_days_off_table, lazy='subquery', backref="unavailable_employees")
 
 
 class Day_off(db.Model):
@@ -46,7 +46,6 @@ class Day_off(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     day_of_week = db.Column(db.String(28), nullable=False)
     date = db.Column(db.String(28), nullable=False, unique=True)
-    user_taking_off = db.relationship('Employee', secondary=employees_days_off_table)
 
 
 schedule_table = db.Table(

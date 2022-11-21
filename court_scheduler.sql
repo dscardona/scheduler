@@ -33,12 +33,12 @@ CREATE TABLE employees_days_off (
 );
 
 CREATE TABLE schedule (
-	id SERIAL PRIMARY KEY,
 	date DATE NOT NULL,
 	day_of_week TEXT NOT NULL,
 	scheduler_id INT NOT NULL,
 	employee_id INT NOT NULL,
 	assignment_id TEXT NOT NULL,
+	PRIMARY KEY (date, employee_id, assignment_id)
 );
 
 ALTER TABLE schedule

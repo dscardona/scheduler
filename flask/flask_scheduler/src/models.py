@@ -47,34 +47,10 @@ class Day_off(db.Model):
     day_of_week = db.Column(db.String(28), nullable=False)
     date = db.Column(db.String(28), nullable=False, unique=True)
 
-
-schedule_table = db.Table(
-    'schedule',
-    db.Column(
-        'date', db.String,
-        primary_key=True
-    ),
-
-    db.Column(
-        'day_of_week', db.String,
-        nullable=False
-    ),
-
-    db.Column(
-        'scheduler_id', db.Integer,
-        db.ForeignKey('schedulers.id'),
-        nullable=False
-    ),
-
-    db.Column(
-        'employee_id', db.Integer,
-        db.ForeignKey('employees.id'),
-        primary_key=True
-    ),
-
-    db.Column(
-        'assignment_id', db.Integer,
-        db.ForeignKey('assignments.id'),
-        primary_key=True
-    ),
-)
+class Schedule(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date = db.Column('date', db.String, nullable=False)
+    day_of_week = db.Column('day_of_week', db.String, nullable=False)
+    scheduler_id = db.Column('scheduler_id', db.Integer, db.ForeignKey('schedulers.id'), nullable=False)
+    employee_id = db.Column('employee_id', db.Integer, db.ForeignKey('employees.id'))
+    assignment_id = db.Column('assignment_id', db.Integer, db.ForeignKey('assignments.id'))

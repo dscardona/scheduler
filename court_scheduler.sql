@@ -23,7 +23,7 @@ CREATE TABLE assignments (
 CREATE TABLE days_off (
 	id SERIAL PRIMARY KEY,
 	day_of_week TEXT NOT NULL,
-	date DATE NOT NULL
+	date DATE NOT NULL UNIQUE
 );
 
 CREATE TABLE employees_days_off (

@@ -47,8 +47,6 @@ class Employee(db.Model):
     assigned_association = db.relationship('Schedule', back_populates='employee')
     assigned = association_proxy("assigned_association", "employee")
 
-
-
 class Day_off(db.Model):
     __tablename__ = 'days_off'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

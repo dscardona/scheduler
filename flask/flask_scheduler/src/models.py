@@ -58,8 +58,8 @@ class Schedule(db.Model):
     date = db.Column('date', db.String, nullable=False)
     day_of_week = db.Column('day_of_week', db.String, nullable=False)
     scheduler_id = db.Column('scheduler_id', db.Integer, db.ForeignKey('schedulers.id'), nullable=False)
-    employee_id = db.Column('employee_id', db.Integer, db.ForeignKey('employees.id'))
-    assignment_id = db.Column('assignment_id', db.Integer, db.ForeignKey('assignments.id'))
+    employee_id = db.Column('employee_id', db.Integer, db.ForeignKey('employees.id'), nullable=False)
+    assignment_id = db.Column('assignment_id', db.Integer, db.ForeignKey('assignments.id'), nullable=False)
 
     scheduler = db.relationship('Scheduler', back_populates='shift_scheduled_association')
     employee = db.relationship('Scheduler', back_populates='assigned_association')

@@ -64,7 +64,3 @@ class Schedule(db.Model):
     scheduler = db.relationship('Scheduler', back_populates='shift_scheduled_association')
     employee = db.relationship('Scheduler', back_populates='assigned_association')
     assignment = db.relationship('Scheduler', back_populates='assigned_to_association')
-    
-
-
-

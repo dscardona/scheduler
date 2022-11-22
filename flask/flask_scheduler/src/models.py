@@ -10,11 +10,13 @@ class Scheduler(db.Model):
     email = db.Column(db.String(128), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     username = db.Column(db.String(128), unique=True, nullable=False)
+    shift_scheduled = db.relationship('Schedule', back_populates='scheduler')
 
 class Assignment(db.Model):
     __tablename__ = 'assignments'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     description = db.Column(db.String(128), nullable=False)
+    assigned_to = db.relationship('Schedule', back_populates='assignment')
 
 employees_days_off_table = db.Table(
     'employees_days_off',
@@ -38,7 +40,8 @@ class Employee(db.Model):
     last_name = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), unique=True, nullable=False)
     extension = db.Column(db.Integer, nullable=False)
-    days_off = db.relationship('Day_off', secondary=employees_days_off_table, lazy='subquery', backref="unavailable_employees")
+    days_off = db.relationship('Day_off', secondary=employees_days_off_table, lazy='True', backref="unavailable_employees")
+    assigned_to = db.relationship('Schedule', back_populates='employee')
 
 
 class Day_off(db.Model):
@@ -54,3 +57,11 @@ class Schedule(db.Model):
     scheduler_id = db.Column('scheduler_id', db.Integer, db.ForeignKey('schedulers.id'), nullable=False)
     employee_id = db.Column('employee_id', db.Integer, db.ForeignKey('employees.id'))
     assignment_id = db.Column('assignment_id', db.Integer, db.ForeignKey('assignments.id'))
+
+    scheduler = db.relationship('Scheduler', back_populates='shift_scheduled')
+    employee = db.relationship('Scheduler', back_populates='')
+    assignment = db.relationship('Scheduler', back_populates='assigned_to')
+    
+
+
+

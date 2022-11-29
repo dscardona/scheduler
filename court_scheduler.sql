@@ -23,7 +23,7 @@ CREATE TABLE assignments (
 CREATE TABLE days_off (
 	id SERIAL PRIMARY KEY,
 	day_of_week TEXT NOT NULL,
-	date DATE NOT NULL UNIQUE
+	date DATE NOT NULL
 );
 
 CREATE TABLE employees_days_off (
@@ -100,23 +100,23 @@ INSERT INTO days_off (day_of_week, date) VALUES
 ('Monday', '2022-11-14');
 
 INSERT INTO employees_days_off(employee_id, day_off_id) VALUES
-(1, 1)
-(1, 2)
-(1, 3)
-(2, 1)
-(2, 2)
-(3, 1)
+(34, 14),
+(34, 15),
+(34, 16),
+(35, 14),
+(35, 15),
+(36, 14);
 
 INSERT INTO schedule (day_of_week, date, scheduler_id, employee_id, assignment_id) VALUES 
-('Monday', '2022-11-14', 1, 4, 1),
-('Monday', '2022-11-14', 1, 5, 2),
-('Monday', '2022-11-14', 1, 6, 3),
-('Monday', '2022-11-14', 1, 7, 4),
-('Monday', '2022-11-14', 1, 8, 5),
-('Monday', '2022-11-14', 1, 9, 6),
-('Monday', '2022-11-14', 1, 10, 7),
-('Monday', '2022-11-14', 1, 11, 8),
-('Monday', '2022-11-14', 1, 4, 9),
-('Monday', '2022-11-14', 1, 5, 10),
-('Monday', '2022-11-14', 1, 6, 12),
-('Monday', '2022-11-14', 1, 7, 13);
+('Monday', '2022-11-14', 10, 37, 49),
+('Monday', '2022-11-14', 10, 38, 50),
+('Monday', '2022-11-14', 10, 39, 51),
+('Monday', '2022-11-14', 10, 40, 52),
+('Monday', '2022-11-14', 10, 41, 53),
+('Monday', '2022-11-14', 10, 42, 54),
+('Monday', '2022-11-14', 10, 43, 55),
+('Monday', '2022-11-14', 10, 44, 56),
+('Monday', '2022-11-14', 10, 37, 57),
+('Monday', '2022-11-14', 10, 38, 58),
+('Monday', '2022-11-14', 10, 39, 59),
+('Monday', '2022-11-14', 10, 40, 60);

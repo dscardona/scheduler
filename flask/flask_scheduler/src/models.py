@@ -51,7 +51,7 @@ class Day_off(db.Model):
     __tablename__ = 'days_off'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     day_of_week = db.Column(db.String(28), nullable=False)
-    date = db.Column(db.String(28), nullable=False, unique=True)
+    date = db.Column(db.String(28), nullable=False)
 
 class Schedule(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
